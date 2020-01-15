@@ -46,11 +46,6 @@ for i=1:length(gammas)
 %initial points for inner bound's non-convex optimization problem so there
 %is no downside except increased running time
     initial_w=inner_optimizers;
-    
-    %delete later
-    if inner_bound_array(i)==Inf
-        keyboard
-    end
 end
 figure()
 plot(gammas,outer_bound_array,'b','LineWidth',1);
@@ -70,11 +65,6 @@ disp("Mean percentage performance loss");
 disp(mean(percent_diff));
 disp("Median percentage performance loss");
 disp(median(percent_diff));
-
-%change the position of the legend if necessary
-keyboard
-saveas(gcf,"gammas_varied.png");
-
 
 %now we vary correlations rho_12=rho_23 from 0 to 0.99
 rho=[0.00:0.001:0.99];
@@ -99,11 +89,6 @@ for i=1:length(rho)
         dis("It looks like the solver for all of inner bound optimization problems failed!")
         keyboard
     end
-    %delete
-    %yuzde ucten fazlaysa dur
-    if 100*max((inner_bound_array(i)-outer_bound_array(i))./inner_bound_array(i)) >3
-        keyboard
-    end
 end
 
 figure()
@@ -122,7 +107,4 @@ disp("Mean percentage performance loss");
 disp(mean(percent_diff));
 disp("Median percentage performance loss");
 disp(median(percent_diff));
-%delete later
-keyboard
-saveas(gcf,"rho_varied.png");
 end
