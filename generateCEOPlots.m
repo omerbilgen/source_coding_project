@@ -50,14 +50,14 @@ for i=1:length(gammas)
 %is no downside except increased running time
     initial_w=inner_optimizers;
 end
-%figure()
-%plot(gammas,outer_bound_array,'b','LineWidth',1);
-%hold on;
-%plot(gammas,inner_bound_array,'r--','LineWidth',2);
-%xlabel({'\gamma_1=\gamma_2=\gamma_3'})
-%s=sprintf("%0.2f R_1 + %0.2f R_2 + %0.2f R_3", mu(1),mu(2),mu(3));
-%ylabel(s)
-%legend('Outer Bound','Inner Bound')
+figure()
+semilogy(gammas,outer_bound_array,'b','LineWidth',1);
+hold on;
+semilogy(gammas,inner_bound_array,'r--','LineWidth',2);
+xlabel({'\gamma_2'})
+s=sprintf("%0.2f R_1 + %0.2f R_2 + %0.2f R_3", mu(1),mu(2),mu(3));
+ylabel(s)
+legend('Outer Bound','Inner Bound')
 
 inner_gamma_varied=inner_bound_array;
 outer_gamma_varied=outer_bound_array;
@@ -71,11 +71,6 @@ disp("Mean percentage performance loss");
 disp(mean(percent_diff));
 disp("Median percentage performance loss");
 disp(median(percent_diff));
-
-%change the position of the legend if necessary
-%keyboard
-%saveas(gcf,"gammas_varied.png");
-
 
 %now we vary correlations rho_12=rho_23 from 0 to 0.99
 rho=[0.00:0.001:0.99];
@@ -105,14 +100,14 @@ end
 inner_rho_varied=inner_bound_array;
 outer_rho_varied=outer_bound_array;
 
-%figure()
-%plot(rho,outer_bound_array,'b','LineWidth',1);
-%hold on;
-%plot(rho,inner_bound_array,'r--','LineWidth',2);
-%xlabel({'\rho_{12}=\rho_{23}'})
-%s=sprintf("%0.2f R_1 + %0.2f R_2 + %0.2f R_3", mu(1),mu(2),mu(3));
-%ylabel(s)
-%legend('Outer Bound','Inner Bound')
+figure()
+semilogy(rho,outer_bound_array,'b','LineWidth',1);
+hold on;
+semilogy(rho,inner_bound_array,'r--','LineWidth',2);
+xlabel({'\rho_{12}=\rho_{23}'})
+s=sprintf("%0.2f R_1 + %0.2f R_2 + %0.2f R_3", mu(1),mu(2),mu(3));
+ylabel(s)
+legend('Outer Bound','Inner Bound')
 
 disp("Maximum performance loss as percentage of the inner bound ")
 disp(100*max((inner_bound_array-outer_bound_array)./inner_bound_array));
@@ -122,5 +117,5 @@ disp("Mean percentage performance loss");
 disp(mean(percent_diff));
 disp("Median percentage performance loss");
 disp(median(percent_diff));
-%saveas(gcf,"rho_varied.png");
+
 end
