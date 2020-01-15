@@ -256,7 +256,6 @@ end
 %Sometimes U2=null initial point work better than the initial points above
 %We evaluate the optimization problem only if there has been too much performance loss
 %so far
-%Start searching with M2=null
 if inner_min_so_far > outer_value*1.02
     [inner_optimizers,inner_value,exitflag]=...
         fmincon(@(w)inner_func(w,rhos,mu,decomposition),...
@@ -272,6 +271,5 @@ if inner_min_so_far > outer_value*1.02
         inner_optimizers_so_far=inner_optimizers;
     end
 end
-
 percentage_loss=max(0,100*(inner_min_so_far-outer_value)/inner_min_so_far);
 end
